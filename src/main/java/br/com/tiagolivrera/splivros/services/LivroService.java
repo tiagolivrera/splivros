@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.tiagolivrera.splivros.dto.LivroDTO;
 import br.com.tiagolivrera.splivros.dto.LivroMinDTO;
 import br.com.tiagolivrera.splivros.entities.Livro;
-import br.com.tiagolivrera.splivros.projections.LivroMinProjection;
 import br.com.tiagolivrera.splivros.repositories.LivroRepository;
 import br.com.tiagolivrera.splivros.services.exceptions.ObjectNotFoundException;
 
@@ -33,17 +32,6 @@ public class LivroService {
 			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Livro.class.getName());
 		} else {
 			return new LivroDTO(result.get());
-		}
-	}
-
-	@Transactional(readOnly = true)
-	public List<LivroMinDTO> findByList(Long listId) {
-		List<LivroMinProjection> result = livroRepository.searchByList(listId);
-		if (result.isEmpty()) {
-			throw new ObjectNotFoundException(
-					"Objeto não encontrado! Id: " + listId + ", Tipo: " + Livro.class.getName());
-		} else {
-			return result.stream().map(x -> new LivroMinDTO(x)).toList();
 		}
 	}
 
