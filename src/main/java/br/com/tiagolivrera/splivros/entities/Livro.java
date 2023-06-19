@@ -2,6 +2,8 @@ package br.com.tiagolivrera.splivros.entities;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +26,9 @@ public class Livro {
 	private String editora;
 	private Integer paginas;
 
-	@Lob
-	@Column(name = "sinopse_txt", columnDefinition = "TEXT")
+	//@Lob
+	//@Column(name = "sinopse_txt", columnDefinition = "TEXT")
+	@Column(name = "sinopse_txt", columnDefinition = "clob")
 	private String sinopse;
 
 	private String imgUrl;
